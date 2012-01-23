@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = CD_Admin
 TEMPLATE = app
 
+LIBS += quazip.dll
 
 SOURCES += main.cpp\
         mainwindow.cpp \
