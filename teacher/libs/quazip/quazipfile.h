@@ -45,6 +45,14 @@ class QuaZipFilePrivate;
  * it will create internal QuaZip object. See constructors' descriptions
  * for details. Writing is only possible with the existing instance.
  *
+ * Note that due to the underlying library's limitation it is not
+ * possible to use multiple QuaZipFile instances to open several files
+ * in the same archive at the same time. If you need to write to
+ * multiple files in parallel, then you should write to temporary files
+ * first, then pack them all at once when you have finished writing. If
+ * you need to read multiple files inside the same archive in parallel,
+ * you should extract them all into a temporary directory first.
+ *
  * \section quazipfile-sequential Sequential or random-access?
  *
  * At the first thought, QuaZipFile has fixed size, the start and the
@@ -52,7 +60,7 @@ class QuaZipFilePrivate;
  * there is one major obstacle to making it random-access: ZIP/UNZIP API
  * does not support seek() operation and the only way to implement it is
  * through reopening the file and re-reading to the required position,
- * but this is prohibitely slow.
+ * but this is prohibitively slow.
  *
  * Therefore, QuaZipFile is considered to be a sequential device. This
  * has advantage of availability of the ungetChar() operation (QIODevice
@@ -307,14 +315,21 @@ class QUAZIP_EXPORT QuaZipFile: public QIODevice {
      * specify correct timestamp (by default, current time will be
      * used). See QuaZipNewInfo.
      *
-     * Arguments \a password and \a crc provide necessary information
-     * for crypting. Note that you should specify both of them if you
-     * need crypting. If you do not, pass \c NULL as password, but you
-     * still need to specify \a crc if you are going to use raw mode
-     * (see below).
+     * The \a password argument specifies the password for crypting. Pass NULL
+     * if you don't need any crypting. The \a crc argument was supposed
+     * to be used for crypting too, but then it turned out that it's
+     * false information, so you need to set it to 0 unless you want to
+     * use the raw mode (see below).
      *
      * Arguments \a method and \a level specify compression method and
-     * level.
+     * level. The only method supported is Z_DEFLATED, but you may also
+     * specify 0 for no compression. If all of the files in the archive
+     * use both method 0 and either level 0 is explicitly specified or
+     * data descriptor writing is disabled with
+     * QuaZip::setDataDescriptorWritingEnabled(), then the
+     * resulting archive is supposed to be compatible with the 1.0 ZIP
+     * format version, should you need that. Except for this, \a level
+     * has no other effects with method 0.
      *
      * If \a raw is \c true, no compression is performed. In this case,
      * \a crc and uncompressedSize field of the \a info are required.
@@ -420,6 +435,8 @@ class QUAZIP_EXPORT QuaZipFile: public QIODevice {
     virtual void close();
     /// Returns the error code returned by the last ZIP/UNZIP API call.
     int getZipError() const;
+    /// Returns the number of bytes available for reading.
+    virtual qint64 bytesAvailable() const;
 };
 
 #endif
