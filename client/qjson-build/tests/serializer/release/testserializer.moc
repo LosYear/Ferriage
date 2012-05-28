@@ -1,0 +1,147 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'testserializer.cpp'
+**
+** Created: Mon 2. Apr 00:00:26 2012
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.0)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'testserializer.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.0. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_TestSerializer[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      22,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      16,   15,   15,   15, 0x08,
+      45,   15,   15,   15, 0x08,
+      61,   15,   15,   15, 0x08,
+      82,   15,   15,   15, 0x08,
+      98,   15,   15,   15, 0x08,
+     116,   15,   15,   15, 0x08,
+     139,   15,   15,   15, 0x08,
+     161,   15,   15,   15, 0x08,
+     188,   15,   15,   15, 0x08,
+     207,   15,   15,   15, 0x08,
+     231,   15,   15,   15, 0x08,
+     249,   15,   15,   15, 0x08,
+     272,   15,   15,   15, 0x08,
+     297,   15,   15,   15, 0x08,
+     314,   15,   15,   15, 0x08,
+     336,   15,   15,   15, 0x08,
+     355,   15,   15,   15, 0x08,
+     379,   15,   15,   15, 0x08,
+     400,   15,   15,   15, 0x08,
+     426,   15,   15,   15, 0x08,
+     444,   15,   15,   15, 0x08,
+     467,   15,   15,   15, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_TestSerializer[] = {
+    "TestSerializer\0\0testReadWriteEmptyDocument()\0"
+    "testReadWrite()\0testReadWrite_data()\0"
+    "testValueNull()\0testValueString()\0"
+    "testValueString_data()\0testValueStringList()\0"
+    "testValueStringList_data()\0"
+    "testValueInteger()\0testValueInteger_data()\0"
+    "testValueDouble()\0testValueDouble_data()\0"
+    "testSetDoublePrecision()\0testValueFloat()\0"
+    "testValueFloat_data()\0testValueBoolean()\0"
+    "testValueBoolean_data()\0testSpecialNumbers()\0"
+    "testSpecialNumbers_data()\0testIndentation()\0"
+    "testIndentation_data()\0"
+    "testSerializetoQIODevice()\0"
+};
+
+void TestSerializer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        TestSerializer *_t = static_cast<TestSerializer *>(_o);
+        switch (_id) {
+        case 0: _t->testReadWriteEmptyDocument(); break;
+        case 1: _t->testReadWrite(); break;
+        case 2: _t->testReadWrite_data(); break;
+        case 3: _t->testValueNull(); break;
+        case 4: _t->testValueString(); break;
+        case 5: _t->testValueString_data(); break;
+        case 6: _t->testValueStringList(); break;
+        case 7: _t->testValueStringList_data(); break;
+        case 8: _t->testValueInteger(); break;
+        case 9: _t->testValueInteger_data(); break;
+        case 10: _t->testValueDouble(); break;
+        case 11: _t->testValueDouble_data(); break;
+        case 12: _t->testSetDoublePrecision(); break;
+        case 13: _t->testValueFloat(); break;
+        case 14: _t->testValueFloat_data(); break;
+        case 15: _t->testValueBoolean(); break;
+        case 16: _t->testValueBoolean_data(); break;
+        case 17: _t->testSpecialNumbers(); break;
+        case 18: _t->testSpecialNumbers_data(); break;
+        case 19: _t->testIndentation(); break;
+        case 20: _t->testIndentation_data(); break;
+        case 21: _t->testSerializetoQIODevice(); break;
+        default: ;
+        }
+    }
+    Q_UNUSED(_a);
+}
+
+const QMetaObjectExtraData TestSerializer::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject TestSerializer::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_TestSerializer,
+      qt_meta_data_TestSerializer, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &TestSerializer::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *TestSerializer::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *TestSerializer::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_TestSerializer))
+        return static_cast<void*>(const_cast< TestSerializer*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int TestSerializer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 22)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 22;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

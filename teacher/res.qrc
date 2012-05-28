@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/start_screen" lang="all">
+        <file alias="logo.png">res/logo.png</file>
+        <file alias="new.png">res/new.png</file>
+        <file alias="open.png">res/open.png</file>
+    </qresource>
+</RCC>
