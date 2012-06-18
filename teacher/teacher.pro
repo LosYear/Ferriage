@@ -13,14 +13,21 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     qmanager.cpp \
-    info.cpp
+    info.cpp \
+    addclassdialog.cpp \
+    qclass.cpp \
+    qcommandlinkbuttonextended.cpp
 
 HEADERS  += mainwindow.h \
     qmanager.h \
-    info.h
+    info.h \
+    addclassdialog.h \
+    qclass.h \
+    qcommandlinkbuttonextended.h
 
 FORMS    += mainwindow.ui \
-    info.ui
+    info.ui \
+    addclassdialog.ui
 
 INCLUDEPATH += qjson/src \
                qjson/include

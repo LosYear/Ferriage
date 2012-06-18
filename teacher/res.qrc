@@ -4,4 +4,10 @@
         <file alias="new.png">res/new.png</file>
         <file alias="open.png">res/open.png</file>
     </qresource>
+    <qresource prefix="/addClass" lang="all">
+        <file alias="mask.png">res/mask.png</file>
+    </qresource>
+    <qresource prefix="/rules">
+        <file alias="add">res/add_rule.png</file>
+    </qresource>
 </RCC>
