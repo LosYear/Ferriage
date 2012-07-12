@@ -6,6 +6,7 @@ QManager::QManager(QObject *parent, QWidget* parentWidget) :
 {
     this->bg = 0;
     this->pWidget = parentWidget;
+    this->raft = 0;
 }
 
 void QManager::setName(QString name)
@@ -63,7 +64,10 @@ void QManager::addType(QString name, int count, QPixmap stdImg, QVector<QPixmap>
 
     for ( int i = 0; i < types.size(); i++){
         if (name == types[i].getName()){
+            tmp.setPainted(true);
+            tmp.setEdited(true);
             types[i] = tmp;
+            return;
         }
     }
     this->types.push_back(tmp);
@@ -77,4 +81,58 @@ void QManager::addType(QClass type)
 QString QManager::getName()
 {
     return this->name;
+}
+
+void QManager::addRule(QString object1, QString object2, QString rule)
+{
+
+    QRule* _tmp = new QRule(object1, object2, rule);
+    this->rules.push_back(_tmp);
+}
+
+void QManager::addRule(QString object1, QString object2, QString rule, QString advanced)
+{
+    QRule* _tmp = new QRule(object1, object2, rule, advanced);
+    this->rules.push_back(_tmp);
+}
+
+int QManager::typesSize()
+{
+    return this->types.size();
+}
+
+int QManager::spritesSize()
+{
+    return this->sprites.size();
+}
+
+QClass *QManager::getTypesItem(int id)
+{
+    return &this->types[id];
+}
+
+
+QVector<QClass>::iterator QManager::getTypesBeginIterator()
+{
+    return this->types.begin();
+}
+
+QVector<QClass>::iterator QManager::getTypesEndIterator()
+{
+    return this->types.end();
+}
+
+void QManager::addSprite(QSprite *sprite)
+{
+    this->sprites.push_back(sprite);
+}
+
+QSprite *QManager::getSprite(int id)
+{
+    return this->sprites[id];
+}
+
+QRaft *QManager::getRaft()
+{
+    return this->raft;
 }

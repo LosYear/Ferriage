@@ -5,8 +5,10 @@
 #include <QLabel>
 #include <QString>
 #include <qclass.h>
-#include <QMap>
 #include <QVector>
+#include <qrule.h>
+#include <qsprite.h>
+#include <qraft.h>
 
 class QManager : public QObject
 {
@@ -23,8 +25,20 @@ public:
 
     QString getName();
 
-    //    Виды объектов
-    QVector <QClass> types;
+    void addRule(QString object1, QString object2, QString rule);
+    void addRule(QString object1, QString object2, QString rule, QString advanced);
+
+    int typesSize();
+    int spritesSize();
+    QClass* getTypesItem(int id);
+    QVector<QClass>::iterator getTypesBeginIterator();
+    QVector<QClass>::iterator getTypesEndIterator();
+
+    void addSprite(QSprite* sprite);
+    QSprite* getSprite(int id);
+
+    QRaft* getRaft();
+
 signals:
     
 public slots:
@@ -43,6 +57,18 @@ private:
 
 //    Фоновая картинка
     QLabel* bg;   
+
+//    Правила
+    QVector <QRule*> rules;
+
+//    Спрайты
+    QVector <QSprite*> sprites;
+
+//    Виды объектов
+    QVector <QClass> types;
+
+//    Перевозчик
+    QRaft* raft;
 };
 
 #endif // QMANAGER_H

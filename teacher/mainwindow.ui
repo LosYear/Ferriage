@@ -13,6 +13,235 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/* Основная панель */ 
+#wizard_widget, #rules, #background, #classes, #raft, #position{
+	background: url(:/main/bg);
+}
+
+#rules *, #background *, #classes *, #raft *, #position *{
+	background:transparent;
+}
+
+/* Кнопки */
+#wizard_widget QPushButton {
+	color: #333;
+	border: 2px solid #555;
+	border-radius: 11px;
+	padding: 5px;
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #888);
+}
+
+#wizard_widget QPushButton:hover {
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
+}
+
+#wizard_widget QPushButton:pressed {
+	background: qradialgradient(cx: 0.4, cy: -0.1,
+	fx: 0.4, fy: -0.1,
+	radius: 1.35, stop: 0 #fff, stop: 1 #ddd);
+}
+
+/* Надписи */
+#wizard_widget QLabel{
+	color : white;
+}
+
+/* Поля ввода */
+#wizard_widget QLineEdit{
+	background :qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.255682 			   	rgba(243, 243, 243, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius:10px;
+	border: 2px solid #555;
+}
+
+/* Список */
+#wizard_widget QListView{
+	background:white;
+	border-bottom-right-radius : 10px;
+	border-bottom-left-radius : 10px;
+	border: 2px solid #555;
+
+}
+
+#wizard_widget QListView::item:alternate{
+     background: white;
+ }
+
+#wizard_widget QListView::item{
+     background: rgb(241,244,248);
+ }
+
+#wizard_widget QListView::item:selected{
+     background: rgb(75,149,229);
+ }
+
+/* Кнопочка + */
+#wizard_widget #addClass, #addRule{
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	color: #333;
+	border: 2px solid #555;
+	padding: 5px;
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #888);
+}
+
+#wizard_widget #addClass:hover, #addRule:hover {
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
+}
+
+#wizard_widget #addClass:pressed, #addRule:pressed {
+	background: qradialgradient(cx: 0.4, cy: -0.1,
+	fx: 0.4, fy: -0.1,
+	radius: 1.35, stop: 0 #fff, stop: 1 #ddd);
+}
+
+/* Полоска прокрутки */
+#wizard_widget QScrollBar:vertical{
+	background:transparent;
+	max-width:8px;
+}
+
+#wizard_widget QScrollBar::sub-line:vertical{
+	background:transparent;
+}
+
+#wizard_widget QScrollBar::add-line:vertical{
+	background:transparent;
+}
+
+#wizard_widget QScrollBar::add-page:vertical{
+	background:transparent;
+}
+
+#wizard_widget QScrollBar::sub-page:vertical{
+	background:transparent;
+}
+
+#wizard_widget QScrollBar::handle:vertical{
+	background:rgb(241,241,241);
+	min-height:20px
+}
+
+#wizard_widget QScrollBar::handle:hover:vertical{
+	background:rgb(205,205,205);
+}
+
+#wizard_widget QScrollBar::handle:pressed:vertical{
+	background:rgb(167,167,167);
+}
+
+/* Выпадающие списки */
+#wizard_widget QComboBox{
+	background:qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.255682 rgba(243, 243, 243, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid #555;
+	border-radius:10px;
+}
+
+#wizard_widget  QComboBox::drop-down{
+	border-top-right-radius:10px;
+	border-top-left-radius:10px;
+}
+#wizard_widget QComboBox::down-arrow {
+     image: url(:/main/down);
+     width: 10px;
+     height: 10px;
+
+ }
+#wizard_widget QComboBox QAbstractItemView {
+     border: none;
+     border-radius:none;
+ }
+
+/* Галочка */
+#wizard_widget QCheckBox{
+	color:white;
+}
+
+#wizard_widget QCheckBox:indicator{
+	
+	image: url(:/main/unchecked);
+}
+
+#wizard_widget QCheckBox:indicator::checked{
+	
+	image: url(:/main/checked);
+}
+
+#wizard_widget QCheckBox:indicator:hover{
+	
+	image: url(:/main/unchecked_hovered)
+}
+
+#wizard_widget QCheckBox:indicator::checked:hover{
+	
+	image: url(:/main/checked_hovered)
+}
+
+/* Радио кнопка */
+#wizard_widget QRadioButton{
+	color:white;
+}
+
+#wizard_widget QRadioButton:indicator{
+	
+	image: url(:/main/radio_unchecked);
+}
+
+#wizard_widget QRadioButton:indicator::checked{
+	image: url(:/main/radio_checked);
+}
+
+#wizard_widget QRadioButton:indicator:hover{
+	
+	image: url(:/main/radio_hover);
+	
+}
+
+#wizard_widget QRadioButton:indicator::checked:hover{
+	
+	image: url(:/main/radio_checked_hover);
+	
+}
+
+/* QSpinBox */
+#wizard_widget QSpinBox{
+	border: 2px solid #555;
+	background:qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.255682 rgba(243, 243, 243, 255), stop:1 rgba(255, 255, 255, 255));
+	border-radius : 10px;
+}
+
+#wizard_widget QSpinBox:up-button{
+	border-top-right-radius : 10px;
+}
+
+#wizard_widget QSpinBox:down-button{
+	border-bottom-right-radius : 10px;
+}
+
+#wizard_widget QSpinBox:up-arrow{
+	
+	image: url(:/main/up);
+	height : 8px;
+	width : 8px;
+	margin-right:5px;
+}
+
+#wizard_widget QSpinBox:down-arrow{
+	image: url(:/main/down);
+	height : 8px;
+	width : 8px;
+	margin-right:5px;
+	
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QFrame" name="start_screen">
     <property name="geometry">
@@ -176,32 +405,19 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="background">
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
-     <widget class="QPushButton" name="bg_next">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>170</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Далее</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>310</x>
         <y>20</y>
-        <width>168</width>
-        <height>43</height>
+        <width>191</width>
+        <height>64</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -222,7 +438,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="bgButton">
+          <widget class="QPushButton" name="bgButton">
            <property name="text">
             <string>...</string>
            </property>
@@ -232,43 +448,28 @@
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="classes">
-     <widget class="QListWidget" name="list">
+     <widget class="QPushButton" name="cNext_2">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>0</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Тут некий список</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QToolButton" name="addClass">
-      <property name="geometry">
-       <rect>
-        <x>540</x>
-        <y>0</y>
-        <width>25</width>
-        <height>19</height>
+        <x>701</x>
+        <y>171</y>
+        <width>94</width>
+        <height>27</height>
        </rect>
       </property>
       <property name="text">
-       <string>+</string>
+       <string>Далее</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="classes">
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>640</x>
+        <x>600</x>
         <y>170</y>
-        <width>158</width>
-        <height>25</height>
+        <width>196</width>
+        <height>29</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -288,6 +489,57 @@
        </item>
       </layout>
      </widget>
+     <widget class="QListWidget" name="list">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>-2</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>124</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>t56</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>gt5g</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ujj7</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Новый элемент</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QToolButton" name="addClass">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>-2</y>
+        <width>25</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>+</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="rules">
      <widget class="QLabel" name="label_4">
@@ -303,28 +555,324 @@
        <string>Правила</string>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="addRule">
+     <widget class="QToolButton" name="addRule">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>770</x>
+        <y>-2</y>
+        <width>25</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>+</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>170</y>
+        <width>196</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="rBack">
+         <property name="text">
+          <string>Назад</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rNext">
+         <property name="text">
+          <string>Далее</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="raft">
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
         <y>10</y>
-        <width>41</width>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Перевозчик</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>30</y>
+        <width>191</width>
+        <height>64</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="bgLabel_2">
+         <property name="text">
+          <string>Выберите изображение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLineEdit" name="raft_edit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="raftPick">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>100</y>
+        <width>171</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string/>
+       <string>Может ли перевозчик
+двигаться самостоятельно</string>
       </property>
-      <property name="icon">
-       <iconset resource="res.qrc">
-        <normaloff>:/rules/add</normaloff>:/rules/add</iconset>
+      <property name="checkable">
+       <bool>true</bool>
       </property>
-      <property name="iconSize">
-       <size>
-        <width>25</width>
-        <height>25</height>
-       </size>
+      <property name="checked">
+       <bool>false</bool>
       </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>170</y>
+        <width>196</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QPushButton" name="rBack_2">
+         <property name="text">
+          <string>Назад</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rNext_2">
+         <property name="text">
+          <string>Далее</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QSpinBox" name="maxSprites">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>140</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>130</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Максимальное количество &lt;br&gt;
+объектов</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="position">
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>10</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Позиционирование объектов</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Позиция объекта</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>30</y>
+        <width>301</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Левый берег</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>10</y>
+         <width>82</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На плоту</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>10</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Правый берег</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>70</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Позиция плота</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>60</y>
+        <width>301</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <widget class="QRadioButton" name="radioButton_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Левый берег</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_6">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>10</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Правый берег</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>170</y>
+        <width>196</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QPushButton" name="rBack_3">
+         <property name="text">
+          <string>Назад</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rNext_3">
+         <property name="text">
+          <string>Далее</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>

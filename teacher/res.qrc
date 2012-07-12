@@ -9,5 +9,19 @@
     </qresource>
     <qresource prefix="/rules">
         <file alias="add">res/add_rule.png</file>
+        <file alias="mask">res/mask.png</file>
+    </qresource>
+    <qresource prefix="/main">
+        <file alias="bg">res/bg.crosshatch.slate.png</file>
+        <file alias="down">res/br_down.png</file>
+        <file alias="up">res/br_up.png</file>
+        <file alias="checked">res/checked.png</file>
+        <file alias="checked_hovered">res/checked_hovered.png</file>
+        <file alias="unchecked">res/unchecked.png</file>
+        <file alias="unchecked_hovered">res/unchecked_hovered.png</file>
+        <file alias="radio_checked">res/r_checked.png</file>
+        <file alias="radio_checked_hover">res/r_checked_hover.png</file>
+        <file alias="radio_hover">res/r_hovered.png</file>
+        <file alias="radio_unchecked">res/r_unchecked.png</file>
     </qresource>
 </RCC>

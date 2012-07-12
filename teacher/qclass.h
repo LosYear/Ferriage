@@ -29,11 +29,19 @@ class QClass
 
         void setImgs (QVector <QPixmap> imgs);
         QPixmap getImg (int index);
+
+        bool getPainted(); // Отрисован ли объект
+        void setPainted(bool isPainted); // Задать отрисовку объекта
+
+        bool getEdited(); // Нуждаеться ли объект в перерисовке
+        void setEdited(bool isEdited);
     private:
         QString name; // Должно быть уникальным и желательно на латинице, второе еще не доказано
         int count; // Количество потомков. count >= 1
         QVector <QPixmap> imgs; // Картинки спрайтов, нулевая картинка - стандартная
         //QMap <int, coordinates> positions; // Координаты спрайтов
+        bool isPainted;
+        bool isEdited;
 
 };
 

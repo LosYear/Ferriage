@@ -16,14 +16,26 @@ SOURCES += main.cpp\
     info.cpp \
     addclassdialog.cpp \
     qclass.cpp \
-    qcommandlinkbuttonextended.cpp
+    qcommandlinkbuttonextended.cpp \
+    qrule.cpp \
+    qdroplabel.cpp \
+    qdisplayrule.cpp \
+    qdraglabel.cpp \
+    qsprite.cpp \
+    qraft.cpp
 
 HEADERS  += mainwindow.h \
     qmanager.h \
     info.h \
     addclassdialog.h \
     qclass.h \
-    qcommandlinkbuttonextended.h
+    qcommandlinkbuttonextended.h \
+    qrule.h \
+    qdroplabel.h \
+    qdisplayrule.h \
+    qdraglabel.h \
+    qsprite.h \
+    qraft.h
 
 FORMS    += mainwindow.ui \
     info.ui \
@@ -36,3 +48,6 @@ LIBS += qjson0.dll
 
 RESOURCES += \
     res.qrc
+
+OTHER_FILES += \
+    TODO.txt

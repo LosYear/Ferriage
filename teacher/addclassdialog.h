@@ -38,6 +38,7 @@ private:
     QPixmap stdPix;
 
     //QCommandLinkButtonExtended* stdImg;
+    QClass* arg;
 };
 
 #endif // ADDCLASSDIALOG_H

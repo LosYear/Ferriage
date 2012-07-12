@@ -2,6 +2,8 @@
 
 QClass::QClass()
 {
+    this->setEdited(false);
+    this->setPainted(false);
 }
 
 void QClass::setName(QString name)
@@ -32,4 +34,24 @@ void QClass::setImgs(QVector<QPixmap> imgs)
 QPixmap QClass::getImg(int index)
 {
     return this->imgs[index];
+}
+
+bool QClass::getPainted()
+{
+    return this->isPainted;
+}
+
+void QClass::setPainted(bool isPainted)
+{
+    this->isPainted = isPainted;
+}
+
+bool QClass::getEdited()
+{
+    return this->isEdited;
+}
+
+void QClass::setEdited(bool isEdited)
+{
+    this->isEdited = isEdited;
 }

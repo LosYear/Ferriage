@@ -36,6 +36,8 @@ addClassDialog::addClassDialog(QManager *manager, QClass *arg, QWidget *parent) 
         }
     }
 
+    this->arg = arg;
+
 }
 
 addClassDialog::~addClassDialog()
@@ -156,7 +158,8 @@ void addClassDialog::on_ok_clicked()
         }
     }
 
+    // Добавляем
     this->manager->addType(_tmp.getName(), _tmp.getCount(), this->stdPix,
-                           imgs);
+                       imgs);
     this->close();
 }
