@@ -63,6 +63,7 @@ void MainWindow::initStartScreen()
     this->ui->logo->adjustSize();
 
     this->ui->wizard_widget->hide();
+    this->ui->panel->hide();
 }
 
 void MainWindow::updateList()
@@ -137,6 +138,7 @@ void MainWindow::on_new_task_clicked()
     this->ui->wizard_widget->setGeometry(0,400, 800, 200);
 
     this->ui->wizard_widget->show();
+    this->ui->panel->show();
 
 }
 
@@ -308,10 +310,13 @@ void MainWindow::on_raftPick_clicked()
     QRaft* raft = this->manager->getRaft();
     if (raft == 0){
         raft = new QRaft(this->ui->centralWidget);
+        raft->setState("leftSide");
     }
     raft->setPixmap(QPixmap(path).scaled(QSize(64,64), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     raft->setGeometry(300, 200, 64, 64);
     raft->show();
+
+    this->manager->setRaft(raft);
 
 }
 
@@ -344,4 +349,93 @@ void MainWindow::on_rNext_2_clicked()
 void MainWindow::on_rBack_2_clicked()
 {
     previousStep();
+}
+
+void MainWindow::on_rBack_3_clicked()
+{
+    previousStep();
+}
+
+void MainWindow::on_radioButton_4_clicked()
+{
+    this->manager->getRaft()->setState("leftSide");
+}
+
+void MainWindow::on_radioButton_6_clicked()
+{
+    this->manager->getRaft()->setState("rightSide");
+}
+
+
+void MainWindow::on_step1_clicked()
+{
+    this->ui->step1->setChecked(true);
+
+    this->ui->wizard_widget->setCurrentIndex(0);
+    this->ui->step2->setChecked(false);
+    this->ui->step3->setChecked(false);
+    this->ui->step4->setChecked(false);
+    this->ui->step5->setChecked(false);
+}
+
+void MainWindow::on_step2_clicked()
+{
+    this->ui->step2->setChecked(true);
+
+    this->ui->wizard_widget->setCurrentIndex(1);
+    this->ui->step1->setChecked(false);
+    this->ui->step3->setChecked(false);
+    this->ui->step4->setChecked(false);
+    this->ui->step5->setChecked(false);
+}
+
+void MainWindow::on_step3_clicked()
+{
+    this->ui->step3->setChecked(true);
+
+    this->ui->wizard_widget->setCurrentIndex(2);
+    this->ui->step1->setChecked(false);
+    this->ui->step2->setChecked(false);
+    this->ui->step4->setChecked(false);
+    this->ui->step5->setChecked(false);
+}
+
+void MainWindow::on_step4_clicked()
+{
+    this->ui->step4->setChecked(true);
+
+    this->ui->wizard_widget->setCurrentIndex(3);
+    this->ui->step1->setChecked(false);
+    this->ui->step2->setChecked(false);
+    this->ui->step3->setChecked(false);
+    this->ui->step5->setChecked(false);
+}
+
+void MainWindow::on_step5_clicked()
+{
+    this->ui->step5->setChecked(true);
+
+    this->ui->wizard_widget->setCurrentIndex(4);
+    this->ui->step1->setChecked(false);
+    this->ui->step2->setChecked(false);
+    this->ui->step3->setChecked(false);
+    this->ui->step4->setChecked(false);
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+
+}
+
+void MainWindow::on_minimeze_clicked()
+{
+    if(this->ui->wizard_widget->isVisible()){
+        this->ui->wizard_widget->hide();
+        this->ui->panel->move(this->ui->panel->x(), this->ui->panel->y()+200);
+        this->ui->minimeze->setIcon(QIcon(":/main/up"));
+    }else{
+        this->ui->wizard_widget->show();
+        this->ui->panel->move(this->ui->panel->x(), this->ui->panel->y()-200);
+        this->ui->minimeze->setIcon(QIcon(":/main/down"));
+    }
 }

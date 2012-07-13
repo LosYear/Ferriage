@@ -136,3 +136,8 @@ QRaft *QManager::getRaft()
 {
     return this->raft;
 }
+
+void QManager::setRaft(QRaft *raft)
+{
+    this->raft = raft;
+}

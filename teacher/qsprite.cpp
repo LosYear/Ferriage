@@ -57,3 +57,17 @@ QString QSprite::getClassName()
 {
     return this->className;
 }
+
+void QSprite::mousePressEvent(QMouseEvent *ev)
+{
+    this->offset = ev->pos();
+}
+
+void QSprite::mouseMoveEvent(QMouseEvent *ev)
+{
+    if(ev->buttons() == Qt::LeftButton)
+    {
+        this->move(mapToParent(ev->pos() - offset));
+        this->setPostion(this->state, mapToParent(ev->pos() - offset));
+    }
+}

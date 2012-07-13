@@ -17,10 +17,50 @@
    <string notr="true">/* Основная панель */ 
 #wizard_widget, #rules, #background, #classes, #raft, #position{
 	background: url(:/main/bg);
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
 }
 
 #rules *, #background *, #classes *, #raft *, #position *{
 	background:transparent;
+}
+
+/* Вспомогательная панель */
+#panel {
+	border: none;
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+	stop: 0 #a6a6a6, stop: 0.08 #7f7f7f,
+	stop: 0.39999 #717171, stop: 0.4 #626262,
+	stop: 0.9 #4c4c4c, stop: 1 #333333);
+}
+
+/* Кнопки на panel */
+#panel QPushButton {
+	color: #333;
+	border: 2px solid #555;
+	border-radius: 11px;
+	padding: 5px;
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #888);
+}
+
+#panel QPushButton:hover {
+	background: qradialgradient(cx: 0.3, cy: -0.4,
+	fx: 0.3, fy: -0.4,
+	radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
+}
+
+#panel QPushButton:pressed {
+	background: qradialgradient(cx: 0.4, cy: -0.1,
+	fx: 0.4, fy: -0.1,
+	radius: 1.35, stop: 0 #fff, stop: 1 #ddd);
+}
+
+#panel QPushButton:checked {
+	background: qradialgradient(cx: 0.4, cy: -0.1,
+	fx: 0.4, fy: -0.1,
+	radius: 1.35, stop: 0 #fff, stop: 1 #ddd);
 }
 
 /* Кнопки */
@@ -405,7 +445,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="background">
      <property name="autoFillBackground">
@@ -876,6 +916,156 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QWidget" name="panel" native="true">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>350</y>
+      <width>811</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="buttons" native="true">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="step1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>23</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Выбор фона</string>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="step2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>0</y>
+        <width>23</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Типы объектов</string>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="step3">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>0</y>
+        <width>23</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Правила</string>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="step4">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>0</y>
+        <width>23</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Перевозчик</string>
+      </property>
+      <property name="text">
+       <string>4</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="step5">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>0</y>
+        <width>23</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Позиционирование объектов</string>
+      </property>
+      <property name="text">
+       <string>5</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="minimeze">
+     <property name="geometry">
+      <rect>
+       <x>770</x>
+       <y>10</y>
+       <width>23</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Позиционирование объектов</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/main/down</normaloff>:/main/down</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <zorder>start_screen</zorder>
+   <zorder>panel</zorder>
+   <zorder>wizard_widget</zorder>
   </widget>
   <action name="action">
    <property name="text">

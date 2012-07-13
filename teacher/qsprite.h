@@ -15,6 +15,7 @@
 #define QSPRITE_H
 
 #include <QLabel>
+#include <QMouseEvent>
 
 class QSprite : public QLabel
 {
@@ -45,6 +46,12 @@ private:
 
 
     QString state;
+
+    QPoint offset; // Смещение для движения объекта
+
+protected:
+    void mousePressEvent(QMouseEvent *ev);
+    void mouseMoveEvent(QMouseEvent *ev);
 };
 
 #endif // QSPRITE_H

@@ -38,6 +38,7 @@ public:
     QSprite* getSprite(int id);
 
     QRaft* getRaft();
+    void setRaft(QRaft* raft);
 
 signals:
     

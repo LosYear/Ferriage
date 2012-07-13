@@ -63,6 +63,26 @@ private slots:
 
     void on_rBack_2_clicked();
 
+    void on_rBack_3_clicked();
+
+    void on_radioButton_4_clicked();
+
+    void on_radioButton_6_clicked();
+
+    void on_step1_clicked();
+
+    void on_step2_clicked();
+
+    void on_step3_clicked();
+
+    void on_step4_clicked();
+
+    void on_step5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_minimeze_clicked();
+
 private:
     Ui::MainWindow *ui;
     QWidget* wgt;
