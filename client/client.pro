@@ -1,43 +1,23 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2012-03-24T11:43:17
+# Project created by QtCreator 2012-07-16T20:19:28
 #
 #-------------------------------------------------
 
 QT       += core gui
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 TARGET = client
 TEMPLATE = app
 
-#LIBS += quazip.dll
-CONFIG += link_prl
-INCLUDEPATH += qjson/src \
-               qjson/include
-
-LIBS += qjson0.dll
-
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    qsprite.cpp \
-    qraft.cpp \
-    qmanager.cpp \
-    about.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    qsprite.h \
-    qraft.h \
-    qmanager.h \
-    about.h
+HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui \
-    about.ui
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     res.qrc
-
-OTHER_FILES += \
-    TODO.txt
-
-VERSION = 0.2.0
-win32:RC_FILE += windows.rc
