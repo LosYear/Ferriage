@@ -26,6 +26,8 @@ public:
     // Позиция
     void setPostion(QString name, QPoint value);
     void setPostion(QString name, int xpos, int ypos);
+    QPoint getPosition(QString name);
+
 
     // Состояние(берег)
     void setState(QString state);

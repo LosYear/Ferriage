@@ -83,6 +83,20 @@ private slots:
 
     void on_minimeze_clicked();
 
+    void on_saveFile_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_maxSprites_valueChanged(int arg1);
+
+    void on_checkBox_clicked();
+
+    void on_defaultLeft_clicked();
+
+    void on_defaultRight_clicked();
+
+    void on_maxSprites_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::MainWindow *ui;
     QWidget* wgt;

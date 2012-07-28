@@ -23,5 +23,6 @@
         <file alias="radio_checked_hover">res/r_checked_hover.png</file>
         <file alias="radio_hover">res/r_hovered.png</file>
         <file alias="radio_unchecked">res/r_unchecked.png</file>
+        <file alias="save">res/save.png</file>
     </qresource>
 </RCC>

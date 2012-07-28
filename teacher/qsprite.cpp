@@ -35,6 +35,18 @@ void QSprite::setPostion(QString name, int xpos, int ypos)
     setPostion(name, QPoint(xpos, ypos));
 }
 
+QPoint QSprite::getPosition(QString name)
+{
+    if ( name == "leftSide" ){
+        return this->leftSide;
+    } else if ( name == "rightSide"){
+        return this->rightSide;
+    }
+    else if ( name == "onRaft"){
+        return this->onRaft;
+    }
+}
+
 void QSprite::setState(QString state)
 {
     this->state = state;

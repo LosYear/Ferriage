@@ -9,6 +9,10 @@
 #include "addclassdialog.h"
 #include <QScrollArea>
 #include <qraft.h>
+#include <QJson/Serializer>
+#include <QJson/QObjectHelper>
+#include <QTextStream>
+#include <QBuffer>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) :
     classes_area->setWidget(classes);
     classes_area->setFrameShape(QFrame::NoFrame);
     classes_area->show();
+
+    //this->ui->defaultLeft->click();
+    this->ui->wizard_widget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
@@ -314,9 +321,12 @@ void MainWindow::on_raftPick_clicked()
     }
     raft->setPixmap(QPixmap(path).scaled(QSize(64,64), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     raft->setGeometry(300, 200, 64, 64);
+    raft->raise();
     raft->show();
 
     this->manager->setRaft(raft);
+    this->manager->getRaft()->setState("leftSide");
+    this->ui->raft_edit->setText(path);
 
 }
 
@@ -438,4 +448,74 @@ void MainWindow::on_minimeze_clicked()
         this->ui->panel->move(this->ui->panel->x(), this->ui->panel->y()-200);
         this->ui->minimeze->setIcon(QIcon(":/main/down"));
     }
+}
+
+void MainWindow::on_saveFile_clicked()
+{
+    // Заполняем массив правил
+    this->manager->rulesClear();
+    for(int i = 0; i<this->rules.size(); i++){
+        QString obj1, obj2;
+        obj1 = this->rules[i]->obj1->getClassName();
+        obj2 = this->rules[i]->obj2->getClassName();
+
+        QString rule;
+        switch(this->rules[i]->combobox->currentIndex()){
+            case 0: rule = "forbid"; break;
+            case 1: rule = "advanced forbid"; break;
+            case 2: rule = ">"; break;
+            case 3: rule = ">="; break;
+            case 4: rule = "="; break;
+        }
+
+        if (rule == "advanced forbid"){
+            QString adv_rule, adv_object;
+            switch (this->rules[i]->adv->currentIndex()){
+                case 0: adv_rule = "only with"; break;
+            }
+            adv_object = this->rules[i]->drop_adv->getClassName();
+            this->manager->addRule(obj1, obj2, rule, adv_rule, adv_object);
+        }else {
+           this->manager->addRule(obj1, obj2, rule);
+        }
+    }
+    this->manager->saveToFile("D:/Coding/QT/teacher_new/teacher-build/dir");
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QPixmap* pix = new QPixmap();
+    pix->load("output.txt", "PNG");
+
+    QLabel* lbl = new QLabel(this->ui->centralWidget);
+    lbl->setPixmap(*pix);
+    lbl->setGeometry(0,0,512,512);
+    lbl->show();
+}
+
+void MainWindow::on_maxSprites_valueChanged(int arg1)
+{
+    if (this->manager->getRaft() != 0){
+        this->manager->getRaft()->setItems(arg1);
+    }
+}
+
+void MainWindow::on_checkBox_clicked()
+{
+    this->manager->getRaft()->setMovable(this->ui->checkBox->isChecked());
+}
+
+void MainWindow::on_defaultLeft_clicked()
+{
+    this->manager->getRaft()->setDefaultSide("leftSide");
+}
+
+void MainWindow::on_defaultRight_clicked()
+{
+    this->manager->getRaft()->setDefaultSide("rightSide");
+}
+
+void MainWindow::on_maxSprites_customContextMenuRequested(const QPoint &pos)
+{
+
 }

@@ -3,4 +3,12 @@
         <file alias="logo">res/logo.png</file>
         <file alias="open">res/open.png</file>
     </qresource>
+    <qresource prefix="/main">
+        <file alias="trash_empty">res/trash_empty.png</file>
+        <file alias="trash_full">res/trash_full.png</file>
+        <file alias="left">res/left.png</file>
+        <file alias="right">res/right.png</file>
+        <file alias="sad">res/sad.png</file>
+        <file alias="warning">res/warning.png</file>
+    </qresource>
 </RCC>

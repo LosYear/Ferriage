@@ -18,15 +18,18 @@ public:
 
     void setName (QString name);
     void setTask (QString task);
+
     void setBackground (QString filename);
+    QLabel* getBackground();
 
     void addType (QString name, int count, QPixmap stdImg, QVector<QPixmap> imgs);
     void addType (QClass type);
 
     QString getName();
+    QString getTask();
 
     void addRule(QString object1, QString object2, QString rule);
-    void addRule(QString object1, QString object2, QString rule, QString advanced);
+    void addRule(QString object1, QString object2, QString rule, QString adv_rule, QString adv_obj);
 
     int typesSize();
     int spritesSize();
@@ -39,6 +42,10 @@ public:
 
     QRaft* getRaft();
     void setRaft(QRaft* raft);
+
+    void saveToFile(QString path);
+
+    void rulesClear();
 
 signals:
     

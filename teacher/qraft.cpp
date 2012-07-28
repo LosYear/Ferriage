@@ -27,6 +27,16 @@ void QRaft::setPostion(QString name, int xpos, int ypos)
     }
 }
 
+QPoint QRaft::getPositon(QString name)
+{
+    if( name == "leftSide"){
+        return this->leftPosition;
+    }
+    else{
+        return this->rightPosition;
+    }
+}
+
 void QRaft::setState(QString state)
 {
     this->state = state;
@@ -36,6 +46,21 @@ void QRaft::setState(QString state)
     else{
         this->move(this->rightPosition);
     }
+}
+
+void QRaft::setItems(int items)
+{
+    this->itemsOnIt = items;
+}
+
+int QRaft::getItems()
+{
+    return this->itemsOnIt;
+}
+
+void QRaft::setMovable(bool value)
+{
+    this->isMovable = value;
 }
 
 void QRaft::mousePressEvent(QMouseEvent *ev)
@@ -50,4 +75,20 @@ void QRaft::mouseMoveEvent(QMouseEvent *ev)
         this->move(mapToParent(ev->pos() - offset));
         this->setPostion(this->state, mapToParent(ev->pos() - offset));
     }
+}
+
+
+bool QRaft::getMovable()
+{
+    return this->isMovable;
+}
+
+QString QRaft::getDefaultSide()
+{
+    return this->defaultSide;
+}
+
+void QRaft::setDefaultSide(QString side)
+{
+    this->defaultSide = side;
 }
