@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,7 +42,14 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::on_open_task_clicked()
 {
-    this->manager->loadFromFile("D:/Coding/QT/teacher_new/teacher-build/dir");
+    QString path = QFileDialog::getExistingDirectory(this,
+                                                     QString::fromLocal8Bit("Выберите задачу"),
+                                                     "/");
+    if (path != ""){
+        this->manager->loadFromFile(path);
+    }else{
+        return;
+    }
 
     this->setWindowTitle(this->manager->getName() + " - Ferriage");
     this->resize(800, 600);

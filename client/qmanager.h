@@ -51,6 +51,12 @@ public:
     void toLeftSide();
     void toRightSide();
 
+    // Функции проверки и движения
+    void move(QString side);
+    bool checkForbid(QRule r, bool isMovable, QString side);
+    bool checkAdvancedForbid(QRule r, bool isMovable, QString side);
+    int countObjectsWithState(QString state);
+
 signals:
     
 public slots:

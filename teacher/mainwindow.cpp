@@ -71,6 +71,7 @@ void MainWindow::initStartScreen()
 
     this->ui->wizard_widget->hide();
     this->ui->panel->hide();
+    this->resize(620, 355);
 }
 
 void MainWindow::updateList()
@@ -479,7 +480,12 @@ void MainWindow::on_saveFile_clicked()
            this->manager->addRule(obj1, obj2, rule);
         }
     }
-    this->manager->saveToFile("D:/Coding/QT/teacher_new/teacher-build/dir");
+
+    QString path = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit("Выберите путь для сохранения"),
+                                                     "/");
+    if(path != ""){
+        this->manager->saveToFile(path);
+    }
 }
 
 void MainWindow::on_pushButton_clicked()

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 15. Jul 22:28:34 2012
+** Created: Mon 30. Jul 14:45:01 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -107,7 +107,7 @@ public:
     QWidget *layoutWidget_5;
     QHBoxLayout *horizontalLayout_6;
     QPushButton *rBack_3;
-    QPushButton *rNext_3;
+    QPushButton *saveFile;
     QWidget *panel;
     QWidget *buttons;
     QPushButton *step1;
@@ -116,7 +116,6 @@ public:
     QPushButton *step4;
     QPushButton *step5;
     QPushButton *minimeze;
-    QPushButton *saveFile;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -693,10 +692,10 @@ public:
 
         horizontalLayout_6->addWidget(rBack_3);
 
-        rNext_3 = new QPushButton(layoutWidget_5);
-        rNext_3->setObjectName(QString::fromUtf8("rNext_3"));
+        saveFile = new QPushButton(layoutWidget_5);
+        saveFile->setObjectName(QString::fromUtf8("saveFile"));
 
-        horizontalLayout_6->addWidget(rNext_3);
+        horizontalLayout_6->addWidget(saveFile);
 
         wizard_widget->addWidget(position);
         panel = new QWidget(centralWidget);
@@ -734,18 +733,6 @@ public:
         minimeze->setIcon(icon2);
         minimeze->setIconSize(QSize(10, 10));
         minimeze->setCheckable(false);
-        saveFile = new QPushButton(panel);
-        saveFile->setObjectName(QString::fromUtf8("saveFile"));
-        saveFile->setGeometry(QRect(720, 5, 41, 41));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/main/save"), QSize(), QIcon::Normal, QIcon::Off);
-        saveFile->setIcon(icon3);
-        saveFile->setIconSize(QSize(48, 48));
-        saveFile->setAutoRepeat(false);
-        saveFile->setAutoExclusive(false);
-        saveFile->setAutoDefault(false);
-        saveFile->setDefault(false);
-        saveFile->setFlat(false);
         MainWindow->setCentralWidget(centralWidget);
         start_screen->raise();
         panel->raise();
@@ -753,7 +740,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        wizard_widget->setCurrentIndex(3);
+        wizard_widget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -802,7 +789,7 @@ public:
         radioButton_4->setText(QApplication::translate("MainWindow", "\320\233\320\265\320\262\321\213\320\271 \320\261\320\265\321\200\320\265\320\263", 0, QApplication::UnicodeUTF8));
         radioButton_6->setText(QApplication::translate("MainWindow", "\320\237\321\200\320\260\320\262\321\213\320\271 \320\261\320\265\321\200\320\265\320\263", 0, QApplication::UnicodeUTF8));
         rBack_3->setText(QApplication::translate("MainWindow", "\320\235\320\260\320\267\320\260\320\264", 0, QApplication::UnicodeUTF8));
-        rNext_3->setText(QApplication::translate("MainWindow", "\320\224\320\260\320\273\320\265\320\265", 0, QApplication::UnicodeUTF8));
+        saveFile->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         step1->setToolTip(QApplication::translate("MainWindow", "\320\222\321\213\320\261\320\276\321\200 \321\204\320\276\320\275\320\260", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
@@ -827,7 +814,6 @@ public:
         minimeze->setToolTip(QApplication::translate("MainWindow", "\320\237\320\276\320\267\320\270\321\206\320\270\320\276\320\275\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\276\320\261\321\212\320\265\320\272\321\202\320\276\320\262", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         minimeze->setText(QString());
-        saveFile->setText(QString());
     } // retranslateUi
 
 };

@@ -375,12 +375,12 @@ void QManager::loadFromFile(QString path)
     foreach (QVariant rule, rulesList) {
         QVariantMap _rule = rule.toMap();
 
-        if(_rule["advRule"].toString() != "" && _rule["advObject"].toString() != 0){
+        if(_rule["advRule"].toString() != "" && _rule["advObject"].toString() != ""){
             this->addRule(_rule["object1"].toString(),
                           _rule["object2"].toString(),
                           _rule["rule"].toString(),
                           _rule["advRule"].toString(),
-                          _rule["ruleadvObject"].toString());
+                          _rule["advObject"].toString());
         }
         else{
             this->addRule(_rule["object1"].toString(),
@@ -406,18 +406,7 @@ void QManager::toLeftSide()
             QRule *el = this->rules[i];
 
             if (el->getRule() == "forbid"){
-                bool obj1 = false;
-                bool obj2 = false;
-                for (int j = 0; j<this->sprites.size(); j++){
-                    if( this->sprites[j]->getState() == "rightSide" ){
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            obj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            obj2 = true;
-                        }
-                    }
-                }
-                if (obj1 & obj2){
+                if (!this->checkForbid(*el, this->raft->getMovable(), "rightSide")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Действие невозможно"));
@@ -425,50 +414,34 @@ void QManager::toLeftSide()
 
                     return;
                 }
-                else{
-                    // Можно ехать
-                    this->raft->setState("leftSide");
+            }
+            else if (el->getRule() == "advanced forbid"){
+                if (!this->checkAdvancedForbid(*el, this->raft->getMovable(), "rightSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Действие невозможно"));
+                    msg.exec();
 
-                    for (int j = 0; j<this->sprites.size(); j++){
-                        if(this->sprites[j]->getState() == "onRaft"){
-                            this->sprites[j]->setState("leftSide");
-                        }
-                    }
                     return;
+
                 }
             }
         }
     } else{
+        if(this->countObjectsWithState("onRaft") <= 0){
+            QMessageBox msg;
+            msg.setText(QString::fromLocal8Bit("Плот пуст"));
+            msg.setIconPixmap(QPixmap(":/main/warning"));
+            msg.exec();
+            return;
+        }
+
         // Проверять оба берега
         for (int i = 0; i<this->rules.size(); i++){
             QRule *el = this->rules[i];
 
             if (el->getRule() == "forbid"){
-                bool lObj1 = false;
-                bool lObj2 = false;
-
-                bool rObj1 = false;
-                bool rObj2 = false;
-
-                // Проверяем левый берег
-
-                for (int j = 0; j<this->sprites.size(); j++){
-                    if( this->sprites[j]->getState() == "leftSide" ){
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            lObj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            lObj2 = true;
-                        }
-                    }
-                    else{
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            rObj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            rObj2 = true;
-                        }
-                    }
-                }
-                if ((lObj1 && lObj2) || (rObj1 && rObj2)){
+                if (!this->checkForbid(*el, this->raft->getMovable(), "leftSide")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Действие невозможно"));
@@ -476,24 +449,26 @@ void QManager::toLeftSide()
 
                     return;
                 }
-                else{
-                    // Можно ехать
-                    this->raft->setState("leftSide");
+            } else if (el->getRule() == "advanced forbid"){
+                if (!this->checkAdvancedForbid(*el, this->raft->getMovable(), "leftSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Действие невозможно"));
+                    msg.exec();
 
-                    for (int j = 0; j<this->sprites.size(); j++){
-                        if(this->sprites[j]->getState() == "onRaft"){
-                            this->sprites[j]->setState("leftSide");
-                        }
-                    }
                     return;
+
                 }
             }
         }
     }
+    // Движем
+    // Можно ехать
+    this->move("leftSide");
+    return;
 }
 
-void QManager::toRightSide()
-{
+void QManager::toRightSide(){
     if(this->raft->getMovable()){
         // Плот наблюдатель
         // Значит, проверяем только берег, от которого отъезжаем
@@ -502,18 +477,7 @@ void QManager::toRightSide()
             QRule *el = this->rules[i];
 
             if (el->getRule() == "forbid"){
-                bool obj1 = false;
-                bool obj2 = false;
-                for (int j = 0; j<this->sprites.size(); j++){
-                    if( this->sprites[j]->getState() == "leftSide" ){
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            obj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            obj2 = true;
-                        }
-                    }
-                }
-                if (obj1 & obj2){
+                if (!this->checkForbid(*el, this->raft->getMovable(), "leftSide")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Действие невозможно"));
@@ -521,50 +485,38 @@ void QManager::toRightSide()
 
                     return;
                 }
-                else{
-                    // Можно ехать
-                    this->raft->setState("rightSide");
+            }
+            else if (el->getRule() == "advanced forbid"){
 
-                    for (int j = 0; j<this->sprites.size(); j++){
-                        if(this->sprites[j]->getState() == "onRaft"){
-                            this->sprites[j]->setState("rightSide");
-                        }
-                    }
+                if (this->checkAdvancedForbid(*el, this->raft->getMovable(), "leftSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Действие невозможно"));
+                    msg.exec();
+
                     return;
+
                 }
             }
         }
     } else{
+        // Считаем сколько объектов на плоту
+
+        if(this->countObjectsWithState("onRaft") <= 0){
+            QMessageBox msg;
+            msg.setText(QString::fromLocal8Bit("Плот пуст"));
+            msg.setIconPixmap(QPixmap(":/main/warning"));
+            msg.exec();
+            return;
+        }
+
         // Проверять оба берега
         for (int i = 0; i<this->rules.size(); i++){
             QRule *el = this->rules[i];
 
             if (el->getRule() == "forbid"){
-                bool lObj1 = false;
-                bool lObj2 = false;
 
-                bool rObj1 = false;
-                bool rObj2 = false;
-
-                // Проверяем левый берег
-
-                for (int j = 0; j<this->sprites.size(); j++){
-                    if( this->sprites[j]->getState() == "leftSide" ){
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            lObj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            lObj2 = true;
-                        }
-                    }
-                    else{
-                        if(this->sprites[j]->getClassName() == el->getObject1()){
-                            rObj1 = true;
-                        } else if(this->sprites[j]->getClassName() == el->getObject2()){
-                            rObj2 = true;
-                        }
-                    }
-                }
-                if ((lObj1 && lObj2) || (rObj1 && rObj2)){
+                if (!this->checkForbid(*el, this->raft->getMovable(), "")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Действие невозможно"));
@@ -572,20 +524,179 @@ void QManager::toRightSide()
 
                     return;
                 }
-                else{
-                    // Можно ехать
-                    this->raft->setState("rightSide");
+            } else if (el->getRule() == "advanced forbid"){
 
-                    for (int j = 0; j<this->sprites.size(); j++){
-                        if(this->sprites[j]->getState() == "onRaft"){
-                            this->sprites[j]->setState("rightSide");
-                        }
-                    }
+                if (!checkAdvancedForbid(*el, this->raft->getMovable(), "rightSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Действие невозможно"));
+                    msg.exec();
+
                     return;
+
                 }
             }
         }
     }
+
+    this->move("rightSide");
+}
+
+void QManager::move(QString side)
+{
+    // Движем спрайты на берег side
+    this->raft->setState(side);
+
+    for (int j = 0; j<this->sprites.size(); j++){
+        if(this->sprites[j]->getState() == "onRaft"){
+            this->sprites[j]->setState(side);
+        }
+    }
+}
+
+bool QManager::checkForbid(QRule r, bool isMovable, QString side)
+{
+    if(r.getRule() == "forbid"){
+        if(isMovable){
+            // Плот двигается сам, проверяем только один берег
+            bool obj1 = false;
+            bool obj2 = false;
+            for (int i = 0; i<this->sprites.size(); i++){
+                if( this->sprites[i]->getState() == side ){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        obj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        obj2 = true;
+                    }
+                }
+            }
+            if (obj1 & obj2){
+                return false;
+            }
+        }
+        else{
+            // Проверяем оба берега
+            bool lObj1 = false;
+            bool lObj2 = false;
+
+            bool rObj1 = false;
+            bool rObj2 = false;
+
+
+            for (int i = 0; i<this->sprites.size(); i++){
+                QString left, right;
+                if( side == "rightSide"){
+                    right = this->sprites[i]->getState();
+                } else{
+                    left = this->sprites[i]->getState();
+                }
+
+                if( this->sprites[i]->getState() == "leftSide" || left == "onRaft"){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        lObj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        lObj2 = true;
+                    }
+                }
+                else if(this->sprites[i]->getState() == "rightSide" || right == "onRaft"){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        rObj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        rObj2 = true;
+                    }
+                }
+            }
+            if ((lObj1 && lObj2) || (rObj1 && rObj2)){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool QManager::checkAdvancedForbid(QRule r, bool isMovable, QString side)
+{
+    if(r.getRule() == "advanced forbid"){
+        if(isMovable){
+            bool obj1 = false;
+            bool obj2 = false;
+            bool ex = false;
+
+            for (int i = 0; i<this->sprites.size(); i++){
+                if( this->sprites[i]->getState() == side){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        obj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        obj2 = true;
+                    }
+                    else if (this->sprites[i]->getClassName() == r.getAdvObject()){
+                        ex = true;
+                    }
+                }
+            }
+
+            if ((obj1 && obj2) && !ex){
+                return false;
+
+            }
+        } else{
+            bool lObj1 = false;
+            bool lObj2 = false;
+            bool lEx = false;
+
+            bool rObj1 = false;
+            bool rObj2 = false;
+            bool rEx = false;
+
+            for (int i = 0; i<this->sprites.size(); i++){
+                QString left, right;
+                if( side == "rightSide"){
+                    right = this->sprites[i]->getState();
+                } else{
+                    left = this->sprites[i]->getState();
+                }
+                if( this->sprites[i]->getState() == "leftSide" || left == "onRaft"){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        lObj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        lObj2 = true;
+                    }
+                    else if (this->sprites[i]->getClassName() == r.getAdvObject()){
+                        lEx = true;
+                    }
+                } else if(this->sprites[i]->getState() == "rightSide" || right == "onRaft"){
+                    if(this->sprites[i]->getClassName() == r.getObject1()){
+                        rObj1 = true;
+                    } else if(this->sprites[i]->getClassName() == r.getObject2()){
+                        rObj2 = true;
+                    }
+                    else if (this->sprites[i]->getClassName() == r.getAdvObject()){
+                        rEx = true;
+                    }
+                }
+            }
+
+            if ( ((lObj1 && lObj2) && !lEx) || ((rObj1 && rObj2) && !rEx)){
+                return false;
+
+            }
+        }
+    }
+
+    return true;
+}
+
+int QManager::countObjectsWithState(QString state)
+{
+    int count = 0;
+    for (int i = 0; i<this->sprites.size(); i++){
+        if(this->sprites[i]->getState() == state){
+            count++;
+        }
+    }
+
+    return count;
 }
 
 void QManager::spriteToRaft(int id)
