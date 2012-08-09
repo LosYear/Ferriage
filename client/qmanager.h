@@ -56,6 +56,8 @@ public:
     bool checkForbid(QRule r, bool isMovable, QString side);
     bool checkAdvancedForbid(QRule r, bool isMovable, QString side);
     int countObjectsWithState(QString state);
+    int countObjects(QString state, QString className);
+    bool checkMoreOrEqually(QRule r, bool isMovable, QString side);
 
 signals:
     

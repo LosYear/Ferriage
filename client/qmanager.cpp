@@ -426,6 +426,17 @@ void QManager::toLeftSide()
 
                 }
             }
+            else if(el->getRule() == ">="){
+                if (!checkMoreOrEqually(*el, this->raft->getMovable(), "rightSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
+                    msg.exec();
+
+                    return;
+
+                }
+            }
         }
     } else{
         if(this->countObjectsWithState("onRaft") <= 0){
@@ -451,6 +462,17 @@ void QManager::toLeftSide()
                 }
             } else if (el->getRule() == "advanced forbid"){
                 if (!this->checkAdvancedForbid(*el, this->raft->getMovable(), "leftSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
+                    msg.exec();
+
+                    return;
+
+                }
+            }
+            else if(el->getRule() == ">="){
+                if (!checkMoreOrEqually(*el, this->raft->getMovable(), "leftSide")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
@@ -488,7 +510,7 @@ void QManager::toRightSide(){
             }
             else if (el->getRule() == "advanced forbid"){
 
-                if (this->checkAdvancedForbid(*el, this->raft->getMovable(), "leftSide")){
+                if (!this->checkAdvancedForbid(*el, this->raft->getMovable(), "leftSide")){
                     QMessageBox msg;
                     msg.setIconPixmap(QPixmap(":/main/sad"));
                     msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
@@ -496,6 +518,16 @@ void QManager::toRightSide(){
 
                     return;
 
+                }
+            }
+            else if(el->getRule() == ">="){
+                if(!this->checkMoreOrEqually(*el, this->raft->getMovable(), "leftSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
+                    msg.exec();
+
+                    return;
                 }
             }
         }
@@ -534,6 +566,16 @@ void QManager::toRightSide(){
 
                     return;
 
+                }
+            }
+            else if( el->getRule() == ">="){
+                if(!this->checkMoreOrEqually(*el, this->raft->getMovable(), "rightSide")){
+                    QMessageBox msg;
+                    msg.setIconPixmap(QPixmap(":/main/sad"));
+                    msg.setText(QString::fromLocal8Bit("Äåéñòâèå íåâîçìîæíî"));
+                    msg.exec();
+
+                    return;
                 }
             }
         }
@@ -697,6 +739,55 @@ int QManager::countObjectsWithState(QString state)
     }
 
     return count;
+}
+
+int QManager::countObjects(QString state, QString className)
+{
+    int count = 0;
+    for(int i = 0; i<this->sprites.size(); i++){
+        if((this->sprites[i]->getClassName() == className) && (this->sprites[i]->getState() == state) ){
+            count++;
+        }
+    }
+    return count;
+}
+
+bool QManager::checkMoreOrEqually(QRule r, bool isMovable, QString side)
+{
+    if( r.getRule() == ">="){
+        if(isMovable){
+            int obj1 = countObjects(side, r.getObject1());
+            int obj2 = countObjects(side, r.getObject2());
+            if(obj2>obj1 && obj1 != 0 && obj2 != 0){
+                return false;
+            }
+        }
+       else{
+            int lObj1 = countObjects("leftSide", r.getObject1());
+            int lObj2 = countObjects("leftSide", r.getObject2());
+
+            int rObj1 = countObjects("rightSide", r.getObject1());
+            int rObj2 = countObjects("rightSide", r.getObject2());
+
+            int oObj1 = countObjects("onRaft", r.getObject1());
+            int oObj2 = countObjects("onRaft", r.getObject2());
+
+            if(side == "leftSide"){
+                lObj1 += oObj1;
+                lObj2 += oObj2;
+            }
+            else{
+                rObj1 += oObj1;
+                rObj2 += oObj2;
+            }
+
+            if((lObj2>lObj1 && lObj2 != 0 && lObj1 != 0)
+                    || (rObj2>rObj1 && rObj1 != 0 && rObj2 !=0)){
+                return false;
+            }
+       }
+    }
+    return true;
 }
 
 void QManager::spriteToRaft(int id)
