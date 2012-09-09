@@ -45,6 +45,8 @@ public:
     void setId(int id);
     int getId();
     
+    void setMovable(bool val);
+    bool getMovable();
 signals:
     void deleteDrop(int id);
     void drop();
@@ -55,7 +57,8 @@ private:
     QString className;
     QPoint leftSide;
     QPoint rightSide;
-    QPoint onRaft;
+    QPoint rLeft;
+    QPoint rRight;
 
 
     QString state;
@@ -63,6 +66,8 @@ private:
 
     QPoint offset; // Смещение для движения объекта
     int id;
+
+    bool isMovable;
 
 protected:
     void mousePressEvent(QMouseEvent *ev);

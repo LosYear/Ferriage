@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QJson/Serializer>
 #include <QFile>
+#include "spritedialog.h"
 
 QManager::QManager(QObject *parent, QWidget* parentWidget) :
     QObject(parent)
@@ -138,7 +139,12 @@ QVector<QClass>::iterator QManager::getTypesEndIterator()
 
 void QManager::addSprite(QSprite *sprite)
 {
+    sprite->setId(this->sprites.size());
+    sprite->setDefaultSide("leftSide");
+    sprite->setMovable(true);
     this->sprites.push_back(sprite);
+
+    connect(sprite, SIGNAL(doubleClicked(int)), this, SLOT(spriteDoubleClicked(int)));
 }
 
 QSprite *QManager::getSprite(int id)
@@ -224,7 +230,8 @@ void QManager::saveToFile(QString path)
                         save(path+"/"+this->types[i].getName()+"_"+QString::number(k)+".png",
                              "PNG");
                 sprite.insert("pixmap", this->types[i].getName()+"_"+QString::number(k)+".png");
-                sprite.insert("defaultSide", "leftSide"); // Добавить кнопочку в интерфейсе
+                sprite.insert("defaultSide", this->sprites[j]->getDefaultSide()); // Добавить кнопочку в интерфейсе
+                sprite.insert("isMovable", this->sprites[j]->getMovable());
 
                 QVariantMap sGeometry;
                 sGeometry.insert("width", this->sprites[j]->width());
@@ -240,10 +247,17 @@ void QManager::saveToFile(QString path)
                 sRight.insert("y", this->sprites[j]->getPosition("rightSide").y());
                 sGeometry.insert("rightPosition", sRight);
 
-                QVariantMap sRaft;
-                sRaft.insert("x", this->sprites[j]->getPosition("onRaft").x());
-                sRaft.insert("y", this->sprites[j]->getPosition("onRaft").y());
-                sGeometry.insert("onRaftPosition", sRaft);
+                QVariantMap sRaftL;
+                sRaftL.insert("x", this->sprites[j]->getPosition("onRaftLeft").x());
+                sRaftL.insert("y", this->sprites[j]->getPosition("onRaftLeft").y());
+
+                QVariantMap sRaftR;
+                sRaftR.insert("x", this->sprites[j]->getPosition("onRaftRight").x());
+                sRaftR.insert("y", this->sprites[j]->getPosition("onRaftRight").y());
+
+                sGeometry.insert("onRaftPositionLeft", sRaftL);
+                sGeometry.insert("onRaftPositionRight", sRaftR);
+
                 sprite.insert("geometry", sGeometry);
                 k++;
                 _sprites.push_back(sprite);
@@ -284,4 +298,16 @@ void QManager::saveToFile(QString path)
 void QManager::rulesClear()
 {
     this->rules.clear();
+}
+
+void QManager::spriteDoubleClicked(int id)
+{
+    SpriteDialog* dialog = new SpriteDialog(id, this);
+    dialog->exec();
+
+    this->sprites[id]->setPixmap(this->sprites[id]->fullImg.scaled(
+                                     this->sprites[id]->width(),
+                                     this->sprites[id]->height(),
+                                     Qt::KeepAspectRatio,
+                                     Qt::SmoothTransformation));
 }

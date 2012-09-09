@@ -27,10 +27,6 @@ void QDropLabel::dropEvent(QDropEvent *event)
 {
     this->class_name = event->mimeData()->text();
 
-    QMessageBox msg;
-    msg.setText(class_name);
-    msg.exec();
-
     QPixmap pix = qvariant_cast<QPixmap>(event->mimeData()->imageData());
 
     this->setPixmap(pix);

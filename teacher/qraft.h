@@ -25,6 +25,8 @@ public:
 
     QString getDefaultSide();
     void setDefaultSide(QString side);
+
+    QPixmap fullImg;
     
 signals:
     

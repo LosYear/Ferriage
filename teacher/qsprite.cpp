@@ -12,6 +12,7 @@
 // ############################
 
 #include "qsprite.h"
+#include "QMessageBox"
 
 QSprite::QSprite(QWidget *parent) :
     QLabel(parent)
@@ -25,8 +26,11 @@ void QSprite::setPostion(QString name, QPoint value)
     } else if ( name == "rightSide"){
         this->rightSide = value;
     }
-    else if ( name == "onRaft"){
-        this->onRaft = value;
+    else if ( name == "onRaftLeft"){
+        this->onRaftLeft = value;
+    }
+    else{
+        this->onRaftRight = value;
     }
 }
 
@@ -42,8 +46,11 @@ QPoint QSprite::getPosition(QString name)
     } else if ( name == "rightSide"){
         return this->rightSide;
     }
-    else if ( name == "onRaft"){
-        return this->onRaft;
+    else if ( name == "onRaftLeft"){
+        return this->onRaftLeft;
+    }
+    else{
+        return this->onRaftRight;
     }
 }
 
@@ -55,8 +62,11 @@ void QSprite::setState(QString state)
     } else if (state == "rightSide"){
         this->move(this->rightSide);
     }
+    else if( state == "onRaftLeft"){
+        this->move(this->onRaftLeft);
+    }
     else{
-        this->move(this->onRaft);
+        this->move(this->onRaftRight);
     }
 }
 
@@ -68,6 +78,21 @@ void QSprite::setClassName(QString name)
 QString QSprite::getClassName()
 {
     return this->className;
+}
+
+int QSprite::getId()
+{
+    return this->id;
+}
+
+void QSprite::setId(int id)
+{
+    this->id = id;
+}
+
+void QSprite::setMovable(bool val)
+{
+    this->isMovable = val;
 }
 
 void QSprite::mousePressEvent(QMouseEvent *ev)
@@ -82,4 +107,25 @@ void QSprite::mouseMoveEvent(QMouseEvent *ev)
         this->move(mapToParent(ev->pos() - offset));
         this->setPostion(this->state, mapToParent(ev->pos() - offset));
     }
+}
+
+void QSprite::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    emit doubleClicked(this->id);
+}
+
+
+bool QSprite::getMovable()
+{
+    return this->isMovable;
+}
+
+void QSprite::setDefaultSide(QString value)
+{
+    this->defaultSide = value;
+}
+
+QString QSprite::getDefaultSide()
+{
+    return this->defaultSide;
 }

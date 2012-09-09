@@ -93,8 +93,11 @@ void MainWindow::drawOnForm()
                 int k = 0;
                 for (int j = 0; j<this->manager->spritesSize(); j++){
                     if(this->manager->getSprite(j)->getClassName() == name){
+                        this->manager->getSprite(j)->fullImg = this->manager->getTypesItem(i)->
+                                getImg(k);
                         this->manager->getSprite(j)->setPixmap(this->manager->getTypesItem(i)->
-                                                               getImg(k).scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                                                               getImg(k).scaled(this->manager->getSprite(j)->width(),
+                                                                                this->manager->getSprite(j)->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
                         k++;
                     }
                 }
@@ -107,8 +110,10 @@ void MainWindow::drawOnForm()
             for (int j = 0; j < count; j++){
                 QSprite* sprite = new QSprite(this->ui->centralWidget);
                 sprite->setClassName(this->manager->getTypesItem(i)->getName());
-                sprite->setPixmap(this->manager->getTypesItem(i)->getImg(j).scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
                 sprite->setGeometry(j*64, i*64, 64, 64);
+                sprite->fullImg = this->manager->getTypesItem(i)->getImg(j);
+                sprite->setPixmap(this->manager->getTypesItem(i)->getImg(j).scaled(sprite->width(), sprite->height(),
+                                                                                   Qt::KeepAspectRatio, Qt::SmoothTransformation));
                 sprite->show();
 
                 sprite->setPostion("leftSide", QPoint(sprite->x(), sprite->y()));
@@ -320,6 +325,7 @@ void MainWindow::on_raftPick_clicked()
         raft = new QRaft(this->ui->centralWidget);
         raft->setState("leftSide");
     }
+    raft->fullImg = QPixmap(path);
     raft->setPixmap(QPixmap(path).scaled(QSize(64,64), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     raft->setGeometry(300, 200, 64, 64);
     raft->raise();
@@ -341,7 +347,7 @@ void MainWindow::on_radioButton_clicked()
 void MainWindow::on_radioButton_2_clicked()
 {
     for (int i = 0; i < this->manager->spritesSize(); i++){
-        this->manager->getSprite(i)->setState("onRaft");
+        this->manager->getSprite(i)->setState("onRaftLeft");
     }
 }
 
@@ -454,6 +460,11 @@ void MainWindow::on_minimeze_clicked()
 void MainWindow::on_saveFile_clicked()
 {
     // Заполняем массив правил
+    if(this->ui->defaultSide->currentIndex() == 0){
+        this->manager->getRaft()->setDefaultSide("leftSide");
+    }else{
+        this->manager->getRaft()->setDefaultSide("rightSide");
+    }
     this->manager->rulesClear();
     for(int i = 0; i<this->rules.size(); i++){
         QString obj1, obj2;
@@ -524,4 +535,32 @@ void MainWindow::on_defaultRight_clicked()
 void MainWindow::on_maxSprites_customContextMenuRequested(const QPoint &pos)
 {
 
+}
+
+void MainWindow::on_spinBox_valueChanged(int arg1)
+{
+
+}
+
+void MainWindow::on_raft_height_valueChanged(int arg1)
+{
+    this->manager->getRaft()->resize( this->manager->getRaft()->width(), this->ui->raft_height->value());
+    this->manager->getRaft()->setPixmap(this->manager->getRaft()->fullImg.scaled(
+                                             this->manager->getRaft()->width(), this->manager->getRaft()->height(),
+                                            Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+void MainWindow::on_raft_width_valueChanged(int arg1)
+{
+    this->manager->getRaft()->resize( this->ui->raft_width->value(), this->manager->getRaft()->height());
+    this->manager->getRaft()->setPixmap(this->manager->getRaft()->fullImg.scaled(
+                                             this->manager->getRaft()->width(), this->manager->getRaft()->height(),
+                                            Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+void MainWindow::on_radioButton_5_clicked()
+{
+    for (int i = 0; i < this->manager->spritesSize(); i++){
+        this->manager->getSprite(i)->setState("onRaftRight");
+    }
 }

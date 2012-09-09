@@ -25,8 +25,11 @@ void QSprite::setPostion(QString name, QPoint value)
     } else if ( name == "rightSide"){
         this->rightSide = value;
     }
-    else if ( name == "onRaft"){
-        this->onRaft = value;
+    else if ( name == "onRaftLeft"){
+        this->rLeft = value;
+    }
+    else{
+        this->rRight = value;
     }
 }
 
@@ -42,8 +45,11 @@ QPoint QSprite::getPosition(QString name)
     } else if ( name == "rightSide"){
         return this->rightSide;
     }
-    else if ( name == "onRaft"){
-        return this->onRaft;
+    else if ( name == "onRaftLeft"){
+        return this->rLeft;
+    }
+    else{
+        return this->rRight;
     }
 }
 
@@ -55,8 +61,11 @@ void QSprite::setState(QString state)
     } else if (state == "rightSide"){
         this->move(this->rightSide);
     }
+    else if(state == "onRaftLeft"){
+        this->move(this->rLeft);
+    }
     else{
-        this->move(this->onRaft);
+        this->move(this->rRight);
     }
 }
 
@@ -86,7 +95,7 @@ void QSprite::mousePressEvent(QMouseEvent *ev)
         QDrag* drag = new QDrag(this);
         QMimeData* mime = new QMimeData;
 
-        if (this->state == "onRaft"){
+        if (this->state == "onRaftLeft" || this->state == "onRaftRight" ){
             mime->setText("!"+QString::number(this->id));
             emit deleteDrop(this->id);
         }
@@ -128,4 +137,15 @@ void QSprite::setId(int id)
 int QSprite::getId()
 {
     return this->id;
+}
+
+void QSprite::setMovable(bool val)
+{
+    this->isMovable = val;
+}
+
+
+bool QSprite::getMovable()
+{
+    return this->isMovable;
 }

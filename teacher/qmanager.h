@@ -50,6 +50,7 @@ public:
 signals:
     
 public slots:
+    void spriteDoubleClicked(int id);
 
 private:
     QWidget* pWidget;

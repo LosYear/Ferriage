@@ -97,6 +97,14 @@ private slots:
 
     void on_maxSprites_customContextMenuRequested(const QPoint &pos);
 
+    void on_spinBox_valueChanged(int arg1);
+
+    void on_raft_height_valueChanged(int arg1);
+
+    void on_raft_width_valueChanged(int arg1);
+
+    void on_radioButton_5_clicked();
+
 private:
     Ui::MainWindow *ui;
     QWidget* wgt;

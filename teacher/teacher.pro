@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     qdisplayrule.cpp \
     qdraglabel.cpp \
     qsprite.cpp \
-    qraft.cpp
+    qraft.cpp \
+    spritedialog.cpp
 
 HEADERS  += mainwindow.h \
     qmanager.h \
@@ -35,11 +36,13 @@ HEADERS  += mainwindow.h \
     qdisplayrule.h \
     qdraglabel.h \
     qsprite.h \
-    qraft.h
+    qraft.h \
+    spritedialog.h
 
 FORMS    += mainwindow.ui \
     info.ui \
-    addclassdialog.ui
+    addclassdialog.ui \
+    spritedialog.ui
 
 INCLUDEPATH += qjson/src \
                qjson/include
